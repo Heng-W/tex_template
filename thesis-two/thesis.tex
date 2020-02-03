@@ -1,0 +1,364 @@
+\documentclass[UTF8,zihao=5,twoside]{ctexart}
+\usepackage{fancyhdr}%页眉页脚
+\usepackage{graphicx}%图片
+\usepackage{amsmath,amsfonts,amssymb}%数学公式，符号
+\usepackage{array}%表格、数组
+\usepackage{cases}%左半边括号
+\usepackage{listings}%附录
+%\usepackage{lastpage}
+\usepackage{subfigure}
+\usepackage{helvet}
+\usepackage{setspace}
+\usepackage{upgreek}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{appendix}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{cite}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{xeCJK}
+\usepackage{fontspec,xunicode,xltxtra}
+\usepackage{latexsym}
+\usepackage{caption}
+\usepackage{wrapfig}
+%\usepackage{mathtime}
+%\usepackage{subcaption}
+\usepackage{float}
+\usepackage{verbatim}
+%\usepackage{mathspec}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+%\usepackage{newtxmath}
+\usepackage{ifthen}
+\usepackage{indentfirst}
+\usepackage{zhnumber}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm,headheight=39pt,headsep=8pt]{geometry}
+
+
+\setCJKmainfont[AutoFakeBold=2.5]{SimSun}%BoldFont=SimHei,ItalicFont=KaiTi
+%\setCJKmonofont{FangSong}
+%\setCJKsansfont[SimHei}
+\setmainfont{Times New Roman}
+%\setallmathfont{Times New Roman}
+\linespread{1.25}
+
+
+\newboolean{ifcntitle}
+\newboolean{ifcnauthor}
+\newboolean{ifcnabstract}
+
+\newboolean{ifentitle}
+\newboolean{ifenauthor}
+\newboolean{ifenabstract}
+
+\renewcommand{\headrule}{{\rule[0.6\baselineskip]{\headwidth}{0.75pt}}\vss}
+%\renewcommand{\headrule}{\vbox to 10pt{\hbox to\headwidth{\hrulefill}\vss}}
+%\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\maketitle}{
+    \ifthenelse{\boolean{ifcntitle}}{\vspace*{-0.8em}\makecntitle}{}
+    \ifthenelse{\boolean{ifcnauthor}}{\vskip 0.5em\cnauthorDef}{}
+    \ifthenelse{\boolean{ifcnabstract}}{\vskip 0.8em\cnabstractDef\vskip 0.8em\cnkeywordDef}{}
+    \ifthenelse{\boolean{ifentitle}}{\vskip 1em\makeentitle}{}
+    \ifthenelse{\boolean{ifenauthor}}{\vskip 0.5em\enauthorDef}{}
+    \ifthenelse{\boolean{ifenabstract}}{\vskip 0.8em\enabstractDef\vskip 0.8em\enkeywordDef}{}
+    \vskip 2em}
+%\renewcommand{\contentsname}{\bf\zihao{3}\centerline{目\quad 录}\vspace{-10pt}}
+%\renewcommand{\abstractname}{\rm\heiti\zihao{3} 摘\quad 要}
+%\renewcommand\thefigure{图}
+%\renewcommand\tablename{表}
+\renewcommand\refname{}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theequation}{\arabic{equation}}
+\renewcommand{\captionlabelfont}{\bf}
+\renewcommand{\captiontextfont}{\heiti}
+
+
+\newcommand{\cntitle}[1]{\gdef\cntitleDef{#1}}
+\newcommand{\cnauthor}[2]{\setboolean{ifcnauthor}{true}\gdef\cnauthorDef{
+    \begin{spacing}{1.5}{\centering\zihao{-4}{\zihao{4}\kaishu{#1}}\par #2\vskip -0.4em}\end{spacing}}}
+\newcommand{\entitle}[1]{\setboolean{ifentitle}{true}\gdef\entitleDef{#1}}
+\newcommand{\enauthor}[2]{\setboolean{ifenauthor}{true}\gdef\enauthorDef{
+    \begin{spacing}{1.5}{\centering\zihao{-4}{\it{#1}}\par #2\vskip -0.4em}\end{spacing}}}
+\newcommand{\cnclass}[1]{\gdef\cnclassDef{#1}}
+\newcommand{\enclass}[1]{\gdef\enclassDef{#1}}
+
+\newcommand{\makecntitle}{{\centering\zihao{-2}\bf\cntitleDef\par}}
+\newcommand{\makeentitle}{{\centering\zihao{-2}\bf\entitleDef\par}}
+\newcommand{\blankpage}{\vfill\clearpage\phantom{s}\thispagestyle{empty}}
+\newcommand{\fancystyle}[3]{
+    \pagestyle{fancy}{
+        \fancyhf{}
+        \fancyhead[CO]{\kaishu\zihao{-4}#1}
+        \fancyhead[CE]{\kaishu\zihao{-4}#2}
+        \fancyfoot[C]{\zihao{-4}#3\thepage}}}
+\newcommand{\upcite}[1]{\!\textsuperscript{\cite{#1}}}
+\newcommand{\sect}[1]{\setcounter{figure}{0}\setcounter{table}{0}\setcounter{equation}{0}\section{#1}}
+\newcommand{\figstyle}{\centering\vspace{-0.1cm}\setlength{\abovecaptionskip}{0.3cm}\setlength{\belowcaptionskip}{-0.5cm}}
+\newcommand{\equstyle}{\setlength\abovedisplayskip{6pt}\setlength\belowdisplayskip{-6pt}}
+\newcommand{\cnabstract}[1]{\setboolean{ifcnabstract}{true}\gdef\cnabstractDef{\noindent{\bf\zihao{-4}摘要：}#1}}
+\newcommand{\cnkeyword}[1]{\gdef\cnkeywordDef{\noindent{\bf 关键词：}#1}}
+\newcommand{\enabstract}[1]{\setboolean{ifenabstract}{true}\gdef\enabstractDef{\noindent{\bf\zihao{-4}Abstract: }#1}}
+\newcommand{\enkeyword}[1]{\gdef\enkeywordDef{\noindent{\bf Keywords: }#1}}
+\newcommand{\makecontents}{\vfill\clearpage
+    \begin{spacing}{1.5}\tableofcontents\end{spacing}}
+\newcommand{\bodyfancystyle}{   %正文样式
+    \fancystyle{\ifthenelse{\thepage=1}{\cnclassDef\\\it\enclassDef}{\oddhead}}{\evenhead}{}
+    \pagenumbering{arabic}\setcounter{page}{1}}
+\newcommand{\oddhead}[1]{\cntitleDef}
+\newcommand{\evenhead}[1]{\cnclassDef}
+
+
+%\def\@cite#1#2{\textsuperscript{[{#1\if@tempswa,#2\fi}]}}
+\captionsetup{labelsep=quad}%labelfont=bf,textfont=bf}
+%\titleformat{\section}{\bfseries\Large}{\thesection}{1em}{}%标题靠左
+\titleformat{\section}{\bf\zihao{3}}{{\thesection}}{0.8em}{}
+\titleformat{\subsection}{\bf\zihao{4}}{{\thesection.\arabic{subsection}}}{0.6em}{}
+\titleformat{\subsubsection}{\bf\zihao{-4}}{{\thesubsection.\arabic{subsubsection}}}{0.4em}{}
+\DeclareFixedFont{\myfont}{OT1}{ptm}{m}{n}{17pt}
+
+
+\titlecontents{section}[0em]{\zihao{4}}{\thecontentslabel\hspace{0.8em}}{}
+{\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\contentspage}}
+\titlecontents{subsection}[1em]{\vspace{0.1\baselineskip}\zihao{-4}}{\thecontentslabel \hspace{0.6em}} {}
+{\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+\titlecontents{subsubsection}[2em]{\vspace{0.1\baselineskip}\zihao{5}}{\thecontentslabel \hspace{0.4em} }{}
+{\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+
+%间距设置
+%\titleformat{\chapter}[display]{ormalfont\huge\bfseries\center}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
+%\titleformat{\section}{ormalfont\Large\bfseries}{\thesection}{1em}{}
+%\titleformat{\subsection}{ormalfont\large\bfseries}{\thesubsection}{1em}{}
+%\titleformat{\subsubsection}{ormalfontormalsize\bfseries}{\thesubsubsection}{1em}{}
+%\titleformat{\paragraph}[runin]{ormalfontormalsize\bfseries}{\theparagraph}{1em}{}
+%\titleformat{\subparagraph}[runin]{ormalfontormalsize\bfseries}{\thesubparagraph}{1em}{}
+
+%\titlespacing*{\chapter} {0pt}{50pt}{40pt}
+%\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+%\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%\titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{1em}
+%\titlespacing*{\subparagraph} {\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+
+
+%\showthe\baselineskip
+%\renewcommand{\baselinestretch}{1}
+%\setlength{\baselineskip}{30pt}
+%\setlength{\lineskip}{0pt}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\topskip}{0pt}
+
+%\setlength{\abovecaptionskip}{0.2cm}%图片标题与图片距离
+%\setlength{\belowcaptionskip}{-0.4cm}%图片标题与下文距离
+
+\titlespacing*{\section} {0pt}{*0.1}{*0.2}
+\titlespacing*{\subsection} {0pt}{*0}{*0}
+\titlespacing*{\subsubsection} {0pt}{*0}{*0}
+%\titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{-1em}
+%\titlespacing*{\subparagraph} {0pt}{3.25ex plus 1ex minus .2ex}{-1em}
+
+
+%代码设置
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\newcommand{\esc}[1]{{\color{dkgreen}\kaishu\fontsize{11.25pt}\baselineskip#1\,}}
+\lstset{
+    backgroundcolor=\color{white},
+    rulecolor=\color{gray!35},
+    basicstyle=\ttfamily\color{black},
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve}\ttfamily,
+	numbers=left,  %显示行号
+    numberstyle=\tiny\color{gray},
+	%frame=tb,
+    framerule=1pt,
+	aboveskip=3mm,
+	belowskip=3mm,
+    showspaces=false,
+	showstringspaces=false,
+	columns=flexible,
+	breaklines=true,
+	breakatwhitespace=false,
+    extendedchars=false,
+    captionpos=b,
+    tabsize=4,
+}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    %bookmarks=true,
+    %bookmarksopen=false,
+    %bookmarksnumbered=false,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=blue,
+    citecolor=black,
+}
+
+%------------------------------------------------------------------------
+
+\cntitle{机器人}
+\cnclass{工业机器人技术}
+\enclass{Industrial Robotics}
+
+\setboolean{ifcntitle}{true}
+\cnauthor{张~~~~三}{(大学名，学院名，省名~城市名~邮政编码)}
+
+\cnabstract{这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字}
+\cnkeyword{测试文字；测试文字}
+
+\entitle{Robot}
+\enauthor{ZHANG San}{(University, College, City~postcode, China)}
+
+\enabstract{this is xelatex}
+\enkeyword{test; test}
+
+%------------------------------------------------------------------------
+%正文部分
+\begin{document}
+
+    \clearpage
+    \bodyfancystyle
+
+    \maketitle
+
+
+    \begin{multicols}{2}
+    \setcounter{section}{-1}
+    \section{引言}
+        这是测试文字这是测试文字
+
+    \section{概括}
+    这是测试文字\upcite{intro}，这是测试文字这是测试文字这是测试文字
+        \subsection{第一小节}
+        这是测试文字这是测试文字
+            \subsubsection{第一小小节}
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字，如图\,\ref{fig-t}\,所示.
+                \begin{figure}[H]
+                    \figstyle
+            	    \includegraphics [width=0.1\textwidth]{figures/test.png}
+            	    \caption{测试}\label{fig-t}
+                \end{figure}
+
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+
+            这是测试文字这是测试文字
+            \subsubsection{第二小小节}
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字，如表\,\ref{tab-t}\,所示.
+                \begin{table}[H]
+                    \centering
+                    \setlength{\abovecaptionskip}{0.1cm}
+                    \setlength{\belowcaptionskip}{-0.1cm}
+                    \caption{测试}\label{tab-t}
+                    \begin{tabu}{|c|c|[1.2pt]ccc|}
+                    \hline
+                    \multicolumn{2}{|c|[1.2pt]}{\multirow{2}{*}{M}}
+                    & \multicolumn{3}{c|}{A}\\
+                    \cline{3-5}
+                    \multicolumn{2}{|c|[1.2pt]}{}&a&b&c\\
+                    \tabucline[1.2pt]{-}
+                    \multirow{3}{*}{B}
+                    &m&1&2&3\\
+                    &n&4&5&6\\
+                    &p&7&8&9\\
+                    \hline
+                    \end{tabu}
+                    \vspace{-0.3cm}
+                \end{table}
+
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+                \begin{table}[H]
+                    \centering
+                    \setlength{\abovecaptionskip}{0.1cm}
+                    \setlength{\belowcaptionskip}{-0.1cm}
+                    \caption{测试}\label{tab-m}
+                    \begin{tabular}{ccc}
+                        \toprule[1.2pt]
+                        A&B&C\\
+                        \midrule
+                        a&b&c\\
+                        \bottomrule[1.2pt]
+                    \end{tabular}
+                    \vspace{-0.3cm}
+                \end{table}
+
+    \section{原理}
+    这是测试文字
+        \subsection{第二小节}
+        %\footnote{这是测试文字}
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+
+
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+
+
+
+            \subsubsection{第二小小节}
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+                {\equstyle
+                \begin{align}
+                    G(s)=\frac{1/0.368}{0.0144s+1}
+                    \label{equ-gs}
+                \end{align}}
+
+            式(\ref{equ-gs})说明了文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+
+    \section{硬件设计}
+    这是测试文字
+        \subsection{系统组成框图}
+            \begin{align}
+            {\Arrowvert x^{(1)}_{k+1}-x^{(1)}_k\Arrowvert}_\lambda\leqslant \;&
+            \frac{1}{1-h_1(i)}\Arrowvert x^{(1)}_{k+1}(0)-x^{(1)}_k(0)\Arrowvert+\notag\\
+            &\frac{h_2(i)}{1-h_1(i)}{\Arrowvert
+            	e^{(1)}_k\Arrowvert}_\lambda+\rho(Q).
+            \end{align}
+    \section{软件设计}
+这是测试文字
+
+    \section{调试}
+
+    \section{总结}
+这是测试文字
+
+    \setcounter{secnumdepth}{-2}
+
+
+    \section{\texorpdfstring{\zihao{4}}{}参考文献(References)}
+    \begin{thebibliography}{99}
+        \vspace{-1.8em}
+        %\addcontentsline{toc}{section}{参考文献}
+        %\setlength{\bibsep}{0.5ex}
+        \addtolength{\itemsep}{-0.7em}
+
+        \bibitem{intro}张卫平.\;\;开关变换器的建模与控制[M].\;\;北京：中国电力出版社，2006-9：15-88.
+
+    \end{thebibliography}
+
+    \end{multicols}
+
+
+\begin{comment}
+    \begin{appendix}
+    \section{附录A：\texorpdfstring{\;}{}程序代码}
+
+        \begin{lstlisting}[language=C,escapeinside=``]
+#include "stdio.h"
+
+int main() {
+    return 0;
+}
+
+        \end{lstlisting}
+    \end{appendix}
+\end{comment}
+
+\end{document}

@@ -1,0 +1,447 @@
+\documentclass[UTF8,zihao=-4,twoside]{ctexart}
+\usepackage{fancyhdr}%页眉页脚
+\usepackage{graphicx}%图片
+\usepackage{amsmath,amsfonts,amssymb}%数学公式，符号
+\usepackage{array}%表格、数组
+\usepackage{cases}%左半边括号
+\usepackage{listings}%附录
+%\usepackage{lastpage}
+\usepackage{subfigure}
+\usepackage{helvet}
+\usepackage{setspace}
+\usepackage{upgreek}
+\usepackage{multirow}
+\usepackage{appendix}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{cite}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{xeCJK}
+\usepackage{latexsym}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{fontspec}
+%\usepackage{mathtime}
+%\usepackage{subcaption}
+\usepackage{float}
+\usepackage{verbatim}
+%\usepackage{mathspec}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+%\usepackage{newtxmath}
+\usepackage{ifthen}
+\usepackage{indentfirst}
+\usepackage{zhnumber}
+\usepackage{amsthm}
+\usepackage[a4paper,left=2.5cm,right=2cm,top=2cm,bottom=2cm,headsep=4pt]{geometry}
+
+
+\setCJKmainfont[AutoFakeBold=2.7]{SimSun}%BoldFont=SimHei,ItalicFont=KaiTi(\bf,\it)
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+\setmainfont{Times New Roman}
+\setsansfont{Calibri}%无衬线字体\sf   Arial、Calibri、Latin Modern Sans
+\setmonofont{Courier}%等宽字体/打印机字体\tt
+%\setmathfont{Latin Modern Math}
+\linespread{1.25}
+%衬线字体\rm  Times New Roman、Cambria、Latin Modern
+%倾斜\sl，数字斜体\mit，小体大写字母\sc
+%\renewcommand\familydefault{\rmdefault}
+
+%\setCJKfamilyfont{songFy}{SimSun}[AutoFakeBold=10]
+%\newcommand*{\songFt}{\CJKfamily{songFy}}
+\newCJKfontfamily{\songFt}{SimSun}[AutoFakeBold=4]
+\newfontfamily{\sansFt}{Latin Modern Sans}[AutoFakeBold=4]
+\newCJKfontfamily{\stxingkai}{STXingkai}[AutoFakeBold=2]
+
+\newtheoremstyle{thmstyle}{0pt}{0pt}{}{\parindent}{\bf}{}{\ccwd}{\thmname{#1}\thmnumber{ #2}\thmnote{#3}}
+\theoremstyle{thmstyle}
+\newtheorem{dingli}{定理}[section]
+\newtheorem{jiashe}{假设}
+
+
+%\renewcommand{\headrule}{\vbox to 10pt{\hbox to\headwidth{\hrulefill}\vss}}
+\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\title}[1]{\gdef\art@title{#1}}
+\renewcommand{\contentsname}{\bf\zihao{3}\centerline{目\quad 录}\vspace{-10pt}}
+\renewcommand{\abstractname}{\rm\heiti\zihao{3} 摘\quad 要}
+\renewcommand\refname{}
+\renewcommand\thefigure{图}
+\renewcommand\tablename{表}
+\renewcommand{\thefigure}{\thesection-\arabic{figure}}
+\renewcommand{\thetable}{\thesection-\arabic{table}}
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+\renewcommand{\captionlabelfont}{\songti}
+\renewcommand{\captiontextfont}{\songti}
+
+
+\newcommand{\class}[1]{\gdef\@class{#1}}
+\newcommand{\blankpage}{\vfill\clearpage\phantom{s}\thispagestyle{empty}}
+\newcommand{\fancystyle}[3]{
+    \pagestyle{fancy}{
+        \fancyhf{}
+        \fancyhead[CO]{\zihao{-5}#1}
+        \fancyhead[CE]{\zihao{-5}#2}
+        \fancyfoot[C]{\zihao{-5}#3\thepage}}}
+\newcommand{\upcite}[1]{\!\textsuperscript{\cite{#1}}}
+\newcommand{\sect}[1]{\vfill\clearpage\setcounter{figure}{0}\setcounter{table}{0}\setcounter{equation}{0}\section{#1}}
+\newcommand{\figstyle}{\centering\vspace{-0.1cm}\setlength{\abovecaptionskip}{0.2cm}\setlength{\belowcaptionskip}{-0.5cm}}
+\newcommand{\equstyle}{\setlength\abovedisplayskip{6pt}\setlength\belowdisplayskip{-6pt}}
+\newcommand{\head}[1]{#1}
+\newcommand{\cnabstract}[1]{\vfill\clearpage
+    \fancystyle{摘要}{ABSTRACT}{\zihao{5}}
+    \pagenumbering{Roman}
+    \section*{\bf\zihao{3}摘\;\;要}#1}
+\newcommand{\cnkeyword}[1]{\vskip 1.5em{\bf 关键词：}#1}
+\newcommand{\enabstract}[1]{\vfill\clearpage
+    \section*{\bf\zihao{3}ABSTRACT}#1}
+\newcommand{\enkeyword}[1]{\vskip 1.5em{\bf Keywords: }#1}
+\newcommand{\makecontents}{\vfill\clearpage
+    \fancystyle{目录}{目录}{}
+    \pagenumbering{roman}
+    \begin{spacing}{1.5}\tableofcontents\end{spacing}}
+\newcommand{\bodyfancystyle}{   %正文样式
+    \fancystyle{\oddhead}{\evenhead}{}
+    \pagenumbering{arabic}\setcounter{page}{1}}
+\newcommand{\appendfancystyle}{  %附录样式
+    \fancystyle{附录}{附录}{}}
+\newcommand{\oddhead}{\art@title}
+\newcommand{\evenhead}{\@class}
+%\newcommand{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1pt}}
+
+%\def\@cite#1#2{\textsuperscript{[{#1\if@tempswa,#2\fi}]}}
+\captionsetup{font=small,labelsep=quad}%labelfont=bf,textfont=bf}
+%\titleformat{\section}{\bfseries\Large}{\thesection}{1em}{}%标题靠左
+\titleformat{\section}{\centering\bf\zihao{3}}{第\thesection 章}{0.8em}{}
+\titleformat{\subsection}{\bf\zihao{4}}{{\thesection.\arabic{subsection}}}{0.6em}{}
+\titleformat{\subsubsection}{\bf\zihao{-4}}{{\thesubsection.\arabic{subsubsection}}}{0.4em}{}
+\DeclareFixedFont{\myfont}{OT1}{ptm}{m}{n}{16pt}
+
+
+\titlecontents{section}[0em]{\zihao{4}}{第\thecontentslabel 章\hspace{0.8em}}{}
+{\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\contentspage}}
+\titlecontents{subsection}[1em]{\vspace{0.1\baselineskip}\zihao{-4}}{\thecontentslabel \hspace{0.6em}} {}
+{\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+\titlecontents{subsubsection}[2em]{\vspace{0.1\baselineskip}\zihao{5}}{\thecontentslabel \hspace{0.4em} }{}
+{\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+
+%间距设置
+%\titleformat{\chapter}[display]{ormalfont\huge\bfseries\center}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
+%\titleformat{\section}{ormalfont\Large\bfseries}{\thesection}{1em}{}
+%\titleformat{\subsection}{ormalfont\large\bfseries}{\thesubsection}{1em}{}
+%\titleformat{\subsubsection}{ormalfontormalsize\bfseries}{\thesubsubsection}{1em}{}
+%\titleformat{\paragraph}[runin]{ormalfontormalsize\bfseries}{\theparagraph}{1em}{}
+%\titleformat{\subparagraph}[runin]{ormalfontormalsize\bfseries}{\thesubparagraph}{1em}{}
+
+%\titlespacing*{\chapter} {0pt}{50pt}{40pt}
+%\titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+%\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%\titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{1em}
+%\titlespacing*{\subparagraph} {\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+
+
+%\showthe\baselineskip
+%\renewcommand{\baselinestretch}{1}
+%\setlength{\baselineskip}{30pt}
+%\setlength{\lineskip}{0pt}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\topskip}{16pt}
+
+%\setlength{\abovecaptionskip}{0.2cm}%图片标题与图片距离
+%\setlength{\belowcaptionskip}{-0.4cm}%图片标题与下文距离
+
+\titlespacing*{\section} {0pt}{*0}{*0.8}
+\titlespacing*{\subsection} {0pt}{*0}{*0}
+\titlespacing*{\subsubsection} {0pt}{*0}{*0}
+%\titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{-1em}
+%\titlespacing*{\subparagraph} {0pt}{3.25ex plus 1ex minus .2ex}{-1em}
+
+
+%代码设置
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\newcommand{\esc}[1]{{\color{dkgreen}\kaishu\fontsize{11.25pt}\baselineskip#1\,}}
+\lstset{
+    backgroundcolor=\color{white},
+    rulecolor=\color{gray!35},
+    basicstyle=\ttfamily\color{black},
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve}\ttfamily,
+	numbers=left,  %显示行号
+    numberstyle=\tiny\color{gray},
+	%frame=tb,
+    framerule=1pt,
+	aboveskip=3mm,
+	belowskip=3mm,
+    showspaces=false,
+	showstringspaces=false,
+	columns=flexible,
+	breaklines=true,
+	breakatwhitespace=false,
+    extendedchars=false,
+    captionpos=b,
+    tabsize=4,
+}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    %bookmarks=true,
+    %bookmarksopen=false,
+    %bookmarksnumbered=false,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=blue,
+    citecolor=black,
+}
+
+%------------------------------------------------------------------------
+
+\title{三相交流电机变频调速控制器的设计}
+\class{DSP\,原理及应用}
+
+%------------------------------------------------------------------------
+%正文部分
+\begin{document}
+
+    \begin{titlepage}
+        \vspace*{-2.75em}
+        {\hskip 10.25cm\bf 编\hspace{0.4em} 号 \qquad 123456}
+
+		\vspace*{1.9cm}
+        \centering
+		{\fontsize{50pt}\baselineskip\stxingkai 大学名称}\\
+		\vspace*{2.45cm}
+		{\fontsize{32pt}\baselineskip\bf{\ziju{0.16}本科生毕业设计（\,论文\,）}}
+		 \vskip 2.3cm
+        {\zihao{2}
+		 \makebox[20mm]{\bf 题目：}
+		 \underline{\makebox[116mm][c]{\sf 本科毕业设计（论文）题目}}\\
+         \vskip 0.4cm
+         \makebox[20mm]{}
+         \underline{\makebox[116mm][c]{\sf  }}
+         \vskip 1.95cm
+         \zihao{-2}
+         \underline{\makebox[60mm][c]{\sf  }}
+         \makebox[13mm]{学\;院}
+         \underline{\makebox[40mm][c]{\sf  }}
+         \makebox[13mm]{专\;业}\\
+         \vskip 1.85cm
+         \makebox[28mm]{学\qquad 号}
+		 \underline{\makebox[70mm][l]{\sf\qquad\quad 123456}}\hspace*{0.9em}	
+		 \vskip 0.3cm
+		 \makebox[28mm]{学生姓名}
+		 \underline{\makebox[70mm][l]{\sf\qquad\quad 张\quad 三}}\hspace*{0.9em}
+		 \vskip 0.3cm
+		 \makebox[28mm]{指导教师}
+		 \underline{\makebox[70mm][l]{\sf\qquad\quad 李\quad 四\quad 教授}}\hspace*{0.9em}
+         \vskip 0.3cm
+         \makebox[28mm]{}
+		 \underline{\makebox[70mm][l]{\sf\qquad\quad 王\quad 五\quad 讲师 }}\hspace*{0.9em}
+		 \vskip 2.45cm
+		 {\sf\zhdigits{\the\year}}年{\sf\zhnumber{\the\month}}月}		
+	\end{titlepage}
+
+    \blankpage
+
+    \cnabstract{三相交流电机的变频调速，用数字信号处理器DSP}
+    \cnkeyword{三相交流电机；变频调速}
+
+    \enabstract{this is xelatex}
+    \enkeyword{test; test}
+
+    \makecontents
+    \blankpage
+
+
+    \sect{概述}
+    \bodyfancystyle
+    这是测试文字\upcite{intro}，这是测试文字这是测试文字这是测试文字
+
+        \subsection{第一小节}
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+            \subsubsection{第一小小节}
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字，如图\,\ref{fig-t}\,所示.
+                \begin{figure}[H]
+                    \figstyle
+            	    \includegraphics [width=0.1\textwidth]{figures/test.png}
+            	    \caption{测试}\label{fig-t}
+                \end{figure}
+
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+            \subsubsection{第二小小节}
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字，如表\,\ref{tab-t}\,所示.
+                \begin{table}[H]
+                    \centering
+                    \setlength{\abovecaptionskip}{0.1cm}
+                    \setlength{\belowcaptionskip}{-0.1cm}
+                    \caption{测试}\label{tab-t}
+                    \begin{tabu}{|c|c|[1.2pt]ccc|}
+                    \hline
+                    \multicolumn{2}{|c|[1.2pt]}{\multirow{2}{*}{M}}
+                    & \multicolumn{3}{c|}{A}\\
+                    \cline{3-5}
+                    \multicolumn{2}{|c|[1.2pt]}{}&a&b&c\\
+                    \tabucline[1.2pt]{-}
+                    \multirow{3}{*}{B}
+                    &m&1&2&3\\
+                    &n&4&5&6\\
+                    &p&7&8&9\\
+                    \hline
+                    \end{tabu}
+                    \vspace{-0.3cm}
+                \end{table}
+
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+                \begin{table}[H]
+                    \centering
+                    \setlength{\abovecaptionskip}{0.1cm}
+                    \setlength{\belowcaptionskip}{-0.1cm}
+                    \caption{测试}\label{tab-m}
+                    \begin{tabular}{ccc}
+                        \toprule[1.2pt]
+                        A&B&C\\
+                        \midrule
+                        a&b&c\\
+                        \bottomrule[1.2pt]
+                    \end{tabular}
+                    \vspace{-0.3cm}
+                \end{table}
+
+    \sect{原理}
+    这是测试文字
+        \subsection{第二小节}
+        %\footnote{这是测试文字}
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+        \begin{dingli}[（李雅普洛夫）]
+          这是测试文字
+        \end{dingli}
+
+        \begin{dingli}
+          这是测试文字
+        \end{dingli}
+
+            \begin{figure}[H]
+                \figstyle
+                \subfigure[test1]{
+                    \begin{minipage}[t]{0.48\textwidth}
+                        \centering
+                	    \includegraphics [width=1in]{figures/test.png}
+                        \label{subfig-a}
+                    \end{minipage}}
+                \subfigure[test2]{
+                    \begin{minipage}[t]{0.48\textwidth}
+                        \centering
+                	    \includegraphics [width=1in]{figures/test.png}
+                        \label{subfig-b}
+                    \end{minipage}}
+                \caption{test\protect\\ ab}
+            \end{figure}
+
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+            \begin{figure}[H]
+                \figstyle
+                \begin{minipage}[t]{0.3\textwidth}
+                    \centering
+            	    \includegraphics [width=1in]{figures/test.png}
+                    \caption{fig1}
+                \end{minipage}
+                \begin{minipage}[t]{0.3\textwidth}
+                    \centering
+            	    \includegraphics [width=1in]{figures/test.png}
+                    \caption{fig2}
+                \end{minipage}
+            \end{figure}
+
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+            这是测试文字这是测试文字这是测试文字这是测试文字
+
+            \begin{wrapfigure}{r}{0.2\textwidth}
+                \figstyle
+                \vspace{-12pt}
+                \includegraphics [width=0.18\textwidth]{figures/test.png}
+                \caption{test}
+            \end{wrapfigure}
+
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字文字这是测试文字这是测试文字
+            \subsubsection{第二小小节}
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+                {\equstyle
+                \begin{align}
+                    G(s)=\frac{1/0.368}{0.0144s+1}
+                    \label{equ-gs}
+                \end{align}}
+
+            式(\ref{equ-gs})说明了文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+            
+             \begin{align}
+            {\Arrowvert x^{(1)}_{k+1}-x^{(1)}_k\Arrowvert}_\lambda\leqslant \;&
+            \frac{1}{1-h_1(i)}\Arrowvert x^{(1)}_{k+1}(0)-x^{(1)}_k(0)\Arrowvert+\notag\\
+            &\frac{h_2(i)}{1-h_1(i)}{\Arrowvert
+            	e^{(1)}_k\Arrowvert}_\lambda+\rho(Q).
+            \end{align}
+            
+    \sect{硬件设计}
+    这是测试文字
+        \subsection{系统组成框图}
+           
+    \sect{软件设计}
+这是测试文字
+
+    \sect{调试}
+这是测试文字
+
+    \sect{总结}
+这是测试文字
+
+    \setcounter{secnumdepth}{-2}
+
+    \vfill
+    \clearpage
+    \section{参考文献}
+    \begin{thebibliography}{99}
+        \vspace{-2.35em}
+        %\addcontentsline{toc}{section}{参考文献}
+        %\setlength{\bibsep}{0.5ex}
+        \addtolength{\itemsep}{-0.7em}
+
+        \bibitem{intro}张卫平.\;\;开关变换器的建模与控制[M].\;\;北京：中国电力出版社，2006-9：15-88.
+
+    \end{thebibliography}
+
+
+    \vfill
+    \clearpage
+    \section{致\texorpdfstring{\quad}{}谢}
+
+
+
+    \vfill
+    \clearpage
+    \appendfancystyle
+    \begin{appendix}
+    \section{附录A：\texorpdfstring{\;}{}程序代码}
+
+        \begin{lstlisting}[language=C,escapeinside=``]
+#include <stdio.h>
+
+//test code
+int main() {
+    return 0;
+}
+
+        \end{lstlisting}
+    \end{appendix}
+
+\end{document}
