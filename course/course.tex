@@ -41,7 +41,7 @@
 \usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm,headheight=14pt,headsep=8pt]{geometry}
 
 
-\setCJKmainfont[AutoFakeBold=2]{SimSun}%BoldFont=SimHei,ItalicFont=KaiTi(\bf,\it)
+\setCJKmainfont[AutoFakeBold=2,,AutoFakeSlant=0.2]{SimSun}%BoldFont=SimHei,ItalicFont=KaiTi(\bf,\it)
 \setCJKsansfont{SimHei}
 \setCJKmonofont{FangSong}
 \setmainfont{Times New Roman}
@@ -62,7 +62,7 @@
 \renewcommand{\contentsname}{\bf\zihao{3}\centerline{目\quad 录}\vspace{-10pt}}
 \renewcommand{\abstractname}{\rm\heiti\zihao{3} 摘\quad 要}
 \renewcommand\refname{}
-\renewcommand\thefigure{图}
+\renewcommand\figurename{图}
 \renewcommand\tablename{表}
 \renewcommand{\thefigure}{\thesection-\arabic{figure}}
 \renewcommand{\thetable}{\thesection-\arabic{table}}
@@ -276,6 +276,8 @@
                     \centering
                     \setlength{\abovecaptionskip}{0.1cm}
                     \setlength{\belowcaptionskip}{-0.1cm}
+                    % \resizebox{\textwidth}{12mm}{}变窄
+                    % \setlength{\tabcolsep}{7mm}{}加宽
                     \caption{测试}\label{tab-t}
                     \begin{tabu}{|c|c|[1.2pt]ccc|}
                     \hline
@@ -348,7 +350,7 @@
 
             这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
             这是测试文字这是测试文字
-           
+
 
             \begin{wrapfigure}{r}{0.2\textwidth}
                 \figstyle
@@ -367,21 +369,21 @@
                 \end{align}}
 
             式(\ref{equ-gs})这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
-            
+
             \begin{align}
             {\Arrowvert x^{(1)}_{k+1}-x^{(1)}_k\Arrowvert}_\lambda\leqslant \;&
             \frac{1}{1-h_1(i)}\Arrowvert x^{(1)}_{k+1}(0)-x^{(1)}_k(0)\Arrowvert+\notag\\
             &\frac{h_2(i)}{1-h_1(i)}{\Arrowvert
             	e^{(1)}_k\Arrowvert}_\lambda+\rho(Q).
             \end{align}
-            
+
     \sect{硬件设计}
- 
+
         \subsection{系统组成框图}
-            
+
 
     \sect{软件设计}
-    
+
         \subsection{软件架构框图}
 
     \sect{调试}
