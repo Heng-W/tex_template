@@ -35,6 +35,9 @@
 \usepackage{indentfirst}
 \usepackage{zhnumber}
 \usepackage{amsthm}
+\usepackage{overpic}
+\usepackage{rotating}
+\usepackage{pifont}
 \usepackage[a4paper,left=2.5cm,right=2cm,top=2cm,bottom=2cm,headsep=4pt]{geometry}
 
 
@@ -65,7 +68,7 @@
 %\renewcommand{\headrule}{\vbox to 10pt{\hbox to\headwidth{\hrulefill}\vss}}
 \renewcommand{\headrulewidth}{0.75pt}
 \renewcommand{\title}[1]{\gdef\art@title{#1}}
-\renewcommand{\contentsname}{\bf\zihao{3}\centerline{目\quad 录}\vspace{-10pt}}
+\renewcommand{\contentsname}{\vspace*{-25pt}\bf\zihao{3}\centerline{目\quad 录}\vspace{-25pt}}
 \renewcommand{\abstractname}{\rm\heiti\zihao{3} 摘\quad 要}
 \renewcommand\refname{}
 \renewcommand\figurename{图}
@@ -73,12 +76,15 @@
 \renewcommand{\thefigure}{\thesection-\arabic{figure}}
 \renewcommand{\thetable}{\thesection-\arabic{table}}
 \renewcommand{\theequation}{\thesection-\arabic{equation}}
-\renewcommand{\captionlabelfont}{\songti}
-\renewcommand{\captiontextfont}{\songti}
+\renewcommand{\captionlabelfont}{\songti\zihao{5}}
+\renewcommand{\captiontextfont}{\songti\zihao{5}}
 
 
 \newcommand{\class}[1]{\gdef\@class{#1}}
 \newcommand{\blankpage}{\vfill\clearpage\phantom{s}\thispagestyle{empty}}
+\newcommand{\addpage}{\vfill\clearpage\phantom{s}}
+\newcommand{\checkpage}{\ifodd\value{page}\addpage\fi}
+\newcommand{\newstyle}[1]{\checkpage\vfill\clearpage#1}
 \newcommand{\fancystyle}[3]{
     \pagestyle{fancy}{
         \fancyhf{}
@@ -86,7 +92,7 @@
         \fancyhead[CE]{\zihao{-5}#2}
         \fancyfoot[C]{\zihao{-5}#3\thepage}}}
 \newcommand{\upcite}[1]{\!\textsuperscript{\cite{#1}}}
-\newcommand{\sect}[1]{\vfill\clearpage\setcounter{figure}{0}\setcounter{table}{0}\setcounter{equation}{0}\section{#1}}
+\newcommand{\sect}[1]{\checkpage\vfill\clearpage\setcounter{figure}{0}\setcounter{table}{0}\setcounter{equation}{0}\section{#1}}
 \newcommand{\figstyle}{\centering\vspace{-0.1cm}\setlength{\abovecaptionskip}{0.2cm}\setlength{\belowcaptionskip}{-0.5cm}}
 \newcommand{\equstyle}{\setlength\abovedisplayskip{6pt}\setlength\belowdisplayskip{-6pt}}
 \newcommand{\head}[1]{#1}
@@ -105,6 +111,10 @@
 \newcommand{\bodyfancystyle}{   %正文样式
     \fancystyle{\oddhead}{\evenhead}{}
     \pagenumbering{arabic}\setcounter{page}{1}}
+\newcommand{\referfancystyle}{  %附录样式
+    \fancystyle{参考文献}{参考文献}{}}
+\newcommand{\thankfancystyle}{  %附录样式
+    \fancystyle{致谢}{致谢}{}}
 \newcommand{\appendfancystyle}{  %附录样式
     \fancystyle{附录}{附录}{}}
 \newcommand{\oddhead}{\art@title}
@@ -258,8 +268,10 @@
     \enabstract{this is xelatex}
     \enkeyword{test; test}
 
-    \makecontents
-    \blankpage
+
+    \makecontents  %生成目录
+
+    \checkpage
 
 
     \sect{概述}
@@ -407,8 +419,8 @@
 
     \setcounter{secnumdepth}{-2}
 
-    \vfill
-    \clearpage
+
+    \newstyle{\referfancystyle}
     \section{参考文献}
     \begin{thebibliography}{99}
         \vspace{-2.35em}
@@ -416,20 +428,22 @@
         %\setlength{\bibsep}{0.5ex}
         \addtolength{\itemsep}{-0.7em}
 
-        \bibitem{intro}张卫平.\;\;开关变换器的建模与控制[M].\;\;北京：中国电力出版社，2006-9：15-88.
+        \bibitem{intro}张卫平．开关变换器的建模与控制[M]．北京：中国电力出版社，2006-9：15-88．
 
     \end{thebibliography}
-
-
-    \vfill
-    \clearpage
+    
+    
+    
+    \newstyle{\thankfancystyle}
     \section{致\texorpdfstring{\quad}{}谢}
+    
+    
+    
+    
 
 
 
-    \vfill
-    \clearpage
-    \appendfancystyle
+    \newstyle{\appendfancystyle}
     \begin{appendix}
     \section{附录A：\texorpdfstring{\;}{}程序代码}
 
@@ -443,5 +457,7 @@ int main() {
 
         \end{lstlisting}
     \end{appendix}
+    
+    \checkpage
 
 \end{document}
