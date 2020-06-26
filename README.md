@@ -8,14 +8,14 @@
 
 ### 截图
 <div align="center">
-	<img src="screenshot/thesis_two.png" height="600" />
-	<img src="screenshot/bachelor.png" height="600" />
+	<img src="screenshots/thesis_two.png" height="600" />
+	<img src="screenshots/bachelor.png" height="600" />
 </div>
 
 <div align="center">
-	<img src="screenshot/course.png" height="600" />
-	<img src="screenshot/course-p1.png" height="600" />
-	<img src="screenshot/course-p2.png" height="600" />
+	<img src="screenshots/course.png" height="600" />
+	<img src="screenshots/course-p1.png" height="600" />
+	<img src="screenshots/course-p2.png" height="600" />
 </div>
 
 
