@@ -171,7 +171,7 @@
 %\titlespacing*{\subparagraph} {0pt}{3.25ex plus 1ex minus .2ex}{-1em}
 
 
-%代码设置
+%代码格式
 \RequirePackage{listings}
 \RequirePackage{xcolor}
 \definecolor{dkgreen}{rgb}{0,0.4,0}
@@ -201,6 +201,7 @@
     tabsize=4,
 }
 
+%为所有引用添加超链接
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -215,16 +216,17 @@
 
 %------------------------------------------------------------------------
 
-\title{三相交流电机变频调速控制器的设计}
-\class{DSP\,原理及应用}
+\title{本科毕业设计（论文）题目}%奇数页页眉
+\class{学士学位论文}%偶数页页眉
 
 %------------------------------------------------------------------------
 %正文部分
 \begin{document}
 
+    %封面
     \begin{titlepage}
         \vspace*{-2.75em}
-        {\hskip 10.25cm\bf 编\hspace{0.4em} 号 \qquad 123456}
+        {\hskip 10.25cm\bf 编\hspace{0.4em} 号 \qquad }
 
 		\vspace*{1.9cm}
         \centering
@@ -233,57 +235,71 @@
 		{\fontsize{32pt}\baselineskip\bf{\ziju{0.16}本科生毕业设计（\,论文\,）}}
 		 \vskip 2.3cm
         {\zihao{2}
-		 \makebox[20mm]{\bf 题目：}
-		 \underline{\makebox[116mm][c]{\sf 本科毕业设计（论文）题目}}\\
-         \vskip 0.4cm
-         \makebox[20mm]{}
-         \underline{\makebox[116mm][c]{\sf  }}
-         \vskip 1.95cm
-         \zihao{-2}
-         \underline{\makebox[60mm][c]{\sf  }}
-         \makebox[13mm]{学\;院}
-         \underline{\makebox[40mm][c]{\sf  }}
-         \makebox[13mm]{专\;业}\\
-         \vskip 1.85cm
-         \makebox[28mm]{学\qquad 号}
-		 \underline{\makebox[70mm][l]{\sf\qquad\quad 123456}}\hspace*{0.9em}	
-		 \vskip 0.3cm
-		 \makebox[28mm]{学生姓名}
-		 \underline{\makebox[70mm][l]{\sf\qquad\quad 张\quad 三}}\hspace*{0.9em}
-		 \vskip 0.3cm
-		 \makebox[28mm]{指导教师}
-		 \underline{\makebox[70mm][l]{\sf\qquad\quad 李\quad 四\quad 教授}}\hspace*{0.9em}
-         \vskip 0.3cm
-         \makebox[28mm]{}
-		 \underline{\makebox[70mm][l]{\sf\qquad\quad 王\quad 五\quad 讲师 }}\hspace*{0.9em}
-		 \vskip 2.45cm
-		 {\sf\zhdigits{\the\year}}年{\sf\zhnumber{\the\month}}月}		
+        \makebox[20mm]{\bf 题目：}
+        \underline{\makebox[116mm][c]{\sf \art@title}}\\
+        \vskip 0.4cm
+        \makebox[20mm]{}
+        \underline{\makebox[116mm][c]{\sf  }}
+        \vskip 1.95cm
+        \zihao{-2}
+        \underline{\makebox[60mm][c]{\sf  }}
+        \makebox[13mm]{学\;院}
+        \underline{\makebox[40mm][c]{\sf  }}
+        \makebox[13mm]{专\;业}\\
+        \vskip 1.85cm
+        \makebox[28mm]{学\qquad 号}
+		\underline{\makebox[70mm][l]{\sf\qquad\quad 123456}}\hspace*{0.9em}	
+		\vskip 0.3cm
+		\makebox[28mm]{学生姓名}
+		\underline{\makebox[70mm][l]{\sf\qquad\quad 张\quad 三}}\hspace*{0.9em}
+		\vskip 0.3cm
+		\makebox[28mm]{指导教师}
+		\underline{\makebox[70mm][l]{\sf\qquad\quad 李\quad 四\quad 教授}}\hspace*{0.9em}
+        \vskip 0.3cm
+        \makebox[28mm]{}
+		\underline{\makebox[70mm][l]{\sf\qquad\quad 王\quad 五\quad 讲师 }}\hspace*{0.9em}
+		\vskip 2.45cm
+		{\sf\zhdigits{\the\year}}年{\sf\zhnumber{\the\month}}月}		
 	\end{titlepage}
 
+    %插入空白页
     \blankpage
+    
 
-    \cnabstract{三相交流电机的变频调速，用数字信号处理器DSP}
-    \cnkeyword{三相交流电机；变频调速}
+    %中文摘要
+    \cnabstract{
+    这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+    这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+    }
+    %中文关键词
+    \cnkeyword{关键词0；关键词1；关键词2}
 
-    \enabstract{this is xelatex}
-    \enkeyword{test; test}
+    %英文摘要
+    \enabstract{This is XeLaTex. Compile the document twice to create reference.}
+    %英文关键词
+    \enkeyword{test0; test1; test2}
 
 
-    \makecontents  %生成目录
-
+    %目录页
+    \makecontents
+    
+    %奇偶页检查（奇数则再添加一页）
     \checkpage
 
 
-    \sect{概述}
-    \bodyfancystyle
-    这是测试文字\upcite{intro}，这是测试文字这是测试文字这是测试文字
+    \sect{绪论}
+    \bodyfancystyle%正文页眉页脚格式
+    
+        \subsection{课题研究目的及意义}
+    
+        这是测试文字\upcite{intro}，这是测试文字这是测试文字这是测试文字。
 
-        \subsection{第一小节}
-        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字\upcite{intro1}。
 
-        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字
+        这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字\upcite{intro2}。
+        
             \subsubsection{第一小小节}
-            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字，如图\,\ref{fig-t}\,所示.
+            这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字，如图\,\ref{fig-t}\,所示。
                 \begin{figure}[H]
                     \figstyle
             	    \includegraphics [width=0.1\textwidth]{figures/test.png}
@@ -329,8 +345,14 @@
                     \end{tabular}
                     \vspace{-0.3cm}
                 \end{table}
+                
+        \subsection{国内外研究现状}
+        
+        \subsection{课题主要研究内容}
+        
+        \subsection{本文结构安排}
 
-    \sect{原理}
+    \sect{设计原理}
     这是测试文字
         \subsection{第二小节}
         %\footnote{这是测试文字}
@@ -409,37 +431,56 @@
         \subsection{系统组成框图}
 
     \sect{软件设计}
-这是测试文字
+    这是测试文字
 
-    \sect{调试}
-这是测试文字
+    \sect{系统调试}
+    这是测试文字
 
-    \sect{总结}
-这是测试文字
+    \sect{结论与展望}
 
+        \subsection{结论}
+    
+        这是测试文字
+    
+        \subsection{不足之处及未来展望}
+
+
+
+    
     \setcounter{secnumdepth}{-2}
-
-
+    
+    %参考文献页眉页脚格式
     \newstyle{\referfancystyle}
     \section{参考文献}
+    
     \begin{thebibliography}{99}
         \vspace{-2.35em}
         %\addcontentsline{toc}{section}{参考文献}
         %\setlength{\bibsep}{0.5ex}
         \addtolength{\itemsep}{-0.7em}
 
-        \bibitem{intro}张卫平．开关变换器的建模与控制[M]．北京：中国电力出版社，2006-9：15-88．
+        %\bibitem{intro}张卫平．开关变换器的建模与控制[M]．北京：中国电力出版社，2006-9：15-88．
+        
+
+        \bibitem{intro}从树．基于ARM的嵌入式图像识别检测系统的设计[J]．计算机测量与控制，2017，25(9)：36-38．
+        
+        \bibitem{intro1}王永兵．嵌入式智能视觉测量传感器设计与应用研究[D]．北京：北京理工大学，2015.
+        
+        \bibitem{intro2}Stauffer C, Eric W, Grimson L. Learning Patterns 
+        of Activity Using Real-time Tracking[J]. IEEE Transactions on 
+        Pattern Analysis and Machine Intelligence, 2000, 22(8): 747-757.
+
 
     \end{thebibliography}
-    
-    
-    
+
+
+
     \newstyle{\thankfancystyle}
     \section{致\texorpdfstring{\quad}{}谢}
-    
-    
-    
-    
+
+
+
+
 
 
 
@@ -448,16 +489,16 @@
     \section{附录A：\texorpdfstring{\;}{}程序代码}
 
         \begin{lstlisting}[language=C,escapeinside=``]
-#include <stdio.h>
+    #include <stdio.h>
 
-//test code
-int main() {
-    return 0;
-}
+    //test code
+    int main() {
+        return 0;
+    }
 
         \end{lstlisting}
     \end{appendix}
-    
+
     \checkpage
 
 \end{document}
